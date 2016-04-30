@@ -1,7 +1,7 @@
 class DocsController < ApplicationController
   before_action :find_doc, only: [:show, :edit, :update, :destroy]
   def index
-    @docs = Doc.all.order("created_at DESC")
+    @docs = Doc.where(user_id: current_user)
   end
 
   def show
@@ -9,6 +9,13 @@ class DocsController < ApplicationController
 
   def new
     @doc = current_user.docs.build
+    # The only difference between some_firm.clients.new and some_firm.clients
+    # .build seems to be that build also adds the newly-created client to the
+    # clients collection
+  #   If you're creating an object through an association, build should be preferred
+  #  over new as build keeps your in-memory object, some_firm (in this case)
+  #  in a consistent state even before any objects have been saved to the database.
+
   end
 
   def create
