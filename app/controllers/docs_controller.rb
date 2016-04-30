@@ -23,12 +23,22 @@ class DocsController < ApplicationController
   end
 
   def edit
+    # edit is responsible for the new file just the way as edit is responsible for
+    # the new edit..create is responsible for creating parameters and update is
+    #responsible for updating the parameters.
   end
 
   def update
+    if @doc.update doc_params
+      redirect_to @doc
+    else
+      render 'edit'
+    end
   end
 
   def destroy
+    @doc.destroy
+    redirect_to docs_path
   end
 
   private
