@@ -8,7 +8,7 @@ class DocsController < ApplicationController
   end
 
   def new
-    @doc = current_user.docs.build
+    @doc = current_user.Docs.build
     # The only difference between some_firm.clients.new and some_firm.clients
     # .build seems to be that build also adds the newly-created client to the
     # clients collection
